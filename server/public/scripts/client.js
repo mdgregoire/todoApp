@@ -8,7 +8,7 @@ $(document).ready(function(){
 
 
 function onReady(){
-
+  writeList();
 }//end onReady function
 
 function addTaskToTaskTable (objectToAdd){
@@ -50,6 +50,6 @@ function collectTask(){
   addTaskToTaskTable(taskDescription);
 }//end collectTask
 
-function getTasks(){
+function writeList(){
 
-}//end getTasks
+}//end writeList
