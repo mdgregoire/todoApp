@@ -8,7 +8,7 @@ $(document).ready(function(){
 
 
 function onReady(){
-  writeList();
+  getTaskList();
 }//end onReady function
 
 function addTaskToTaskTable (objectToAdd){
@@ -50,6 +50,36 @@ function collectTask(){
   addTaskToTaskTable(taskDescription);
 }//end collectTask
 
-function writeList(){
+
+
+function getTaskList(){
+  $.ajax({
+    url: '/toDo/taskGet',
+    type: 'GET',
+    success: function( data ){
+      console.log( 'got getTaskList: ', data );
+    writeList(data);
+    },
+    error: function(error){
+      console.log('failure on get getTaskList');
+    }
+  });
+}//end getTaskList
+
+function writeList(taskTable){
+  console.log(taskTable, 'in write');
+  $('#viewTasks').empty();
+  for(i=0; i<taskTable.length; i++){
+    let name = taskTable[i].task_name;
+    let catergory = taskTable[i].catergory_name;
+    let dateAssigned = taskTable[i].task_date_assigned.substring(0, 10);
+    let dueDate = taskTable[i].task_due_date.substring(0, 10)
+    let id = taskTable[i].task_id;
+    let stringToAppend = `<tr><td>${name}</td><td>${catergory}</td>
+                          <td>${dateAssigned}</td><td>${dueDate}</td>
+                          <td><input type="radio" class = "complete" id = ${id}></td>
+                          <td><input type="radio" class = "delete" id = ${id}></td></tr>`;
+    $('#viewTasks').append(stringToAppend);
+  }//end for loop
 
 }//end writeList
