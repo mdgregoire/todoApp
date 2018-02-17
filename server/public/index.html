@@ -7,17 +7,129 @@
     <script src="./scripts/client.js" charset="utf-8"></script>
     <link rel="stylesheet" href="./css/styles.css">
   </head>
-  <body background="Scan copy.jpeg" position="center">
-    <h1>TODOAPP</h1>
-    <br>
-    <br>
-    <br>
-    <h2>test</h2>
-    <br>
-    <br>
-    <h2>test</h2>
-    <br>
-    <br>
-    <input type="text" placeholder="test">
+  <body>
+    <div class="container" align="center">
+      <div id="image">
+        <img src="Scan copy.jpeg" position="center" style="width:640px; height:870px">
+      </div>
+      <h1>TODOAPP</h1>
+        <div id="inputs">
+        <section id="inputFields">
+          <input type="text" class="toDoInput" id="taskInput" placeholder="Enter Task Here">
+          <select class="toDoInput" id="catergorySelector">
+            <option value="" disabled selected>Catergory:</option>
+            <option value="kitchen">Kitchen</option>
+            <option value="bathroom">Bathroom</option>
+            <option value="laundry">Laundry</option>
+            <option value="bills">Bills</option>
+            <option value="personal">Personal</option>
+            <option value="work">Work</option>
+            <option value="school">School</option>
+            <option value="misc">Misc</option>
+          </select>
+          <input type="date" class="toDoInput" id="dueDate" placeholder="Due Date">
+          <button class="toDoInput" id="taskSubmitButton">Submit Task</button>
+        </section>
+        <section id="sortBy">
+          <select id="sortBySelect">
+            <option value="" disabled selected>Sort By:</option>
+            <option value="dateAdded">Date Added</option>
+            <option value="dueDate">Due Date</option>
+            <option value="catergory">Catergory</option>
+          </select>
+            <button id="sortSubmit">Sort</button>
+        </section>
+      </div><!--End input Field Div -->
+      <h2>All Tasks</h2>
+      <div id="toDoTable">
+
+        <table>
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Catergory</th>
+              <th>Date Assigned</th>
+              <th>Due Date</th>
+              <th class = "radial">Complete</th>
+              <th class = "radial">Delete?</th>
+            </tr>
+            <tr>
+              <td>ToDoApp</td>
+              <td>School</td>
+              <td>02/16/2018</td>
+              <td>02/18/2018</td>
+              <td>
+                <input type="radio">
+              </td>
+              <td>
+                <input type="radio">
+              </td>
+            </tr>
+            <tr>
+              <td>ToDoApp</td>
+              <td>School</td>
+              <td>02/16/2018</td>
+              <td>02/18/2018</td>
+              <td>
+                <input type="radio">
+              </td>
+              <td>
+                <input type="radio">
+              </td>
+            </tr>
+            <tr>
+              <td>ToDoApp</td>
+              <td>School</td>
+              <td>02/16/2018</td>
+              <td>02/18/2018</td>
+              <td>
+                <input type="radio">
+              </td>
+              <td>
+                <input type="radio">
+              </td>
+            </tr>
+            <tr>
+              <td>ToDoApp</td>
+              <td>School</td>
+              <td>02/16/2018</td>
+              <td>02/18/2018</td>
+              <td>
+                <input type="radio">
+              </td>
+              <td>
+                <input type="radio">
+              </td>
+            </tr>
+            <tr>
+              <td>ToDoApp</td>
+              <td>School</td>
+              <td>02/16/2018</td>
+              <td>02/18/2018</td>
+              <td>
+                <input type="radio">
+              </td>
+              <td>
+                <input type="radio">
+              </td>
+            </tr>
+            <tr>
+              <td>ToDoApp</td>
+              <td>School</td>
+              <td>02/16/2018</td>
+              <td>02/18/2018</td>
+              <td>
+                <input type="radio">
+              </td>
+              <td>
+                <input type="radio">
+              </td>
+            </tr>
+          </thead>
+          <tbody id="viewTasks">
+          </tbody>
+        </table>
+      </div><!-- End Table  -->
+    </div><!-- End Container, all DOM elements go in here if they need to be on the background image  -->
   </body>
 </html>

@@ -4,16 +4,90 @@ body{
   background-color: darkblue;
   text-align: center;
 }
+.container{
+  width: 640px;
+  height: 870px;
+  margin top: 70px;
+  position: relative;
+}
+#image{
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  position:absolute;
+}
+
+#inputs {
+  width: 640px;
+  height: 25px;
+  position:relative;
+  z-index:10;
+  margin-top: 100px;
+  text-align: left;
+  margin-left: 10px;
+}
+#toDoTable{
+  width: 640px;
+  height: 400px;
+  position:relative;
+  z-index:10;
+  margin-top: 27px;
+  text-align: left;
+  margin-left: 88px;
+}
+#sortBy{
+  text-align: left;
+  margin-top: 5px;
+}
+#sortBySelect{
+  margin-right: 10px;
+}
 h1{
   text-align: center;
 }
 
 h2{
   text-align: center;
-  text-decoration: line-through;
+  position:relative;
+  z-index:10;
 }
 
 input{
   text-align: center;
   background: transparent;
+}
+
+select{
+  background: transparent;
+}
+
+button{
+  background: transparent;
+}
+table {
+  border-collapse: collapse;
+
+}
+tr{
+  border: none;
+}
+td{
+  border-right: solid 1px dodgerblue;
+  border-right: solid 1px dodgerblue;
+  text-align: center;
+  height: 24px;
+}
+th{
+  text-align: center;
+  border-right: solid 1px dodgerblue;
+  border-right: solid 1px dodgerblue;
+  border-bottom: solid 2px dodgerblue;
+  border-top: solid 2px dodgerblue;
+  height: 21px;
+  width: 110px;
+}
+.radial{
+  width: 20px;
+  font-size: x-small;
 }
