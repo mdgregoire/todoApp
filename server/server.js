@@ -8,8 +8,6 @@ app.use(express.static('server/public'));
 const toDoRouter = require('./routers/toDoRouter');
 app.use('/toDo', toDoRouter);
 
-
-
 app.listen(PORT, function(){
   console.log(`server listening on port ${PORT}`);
 });//end app listen
