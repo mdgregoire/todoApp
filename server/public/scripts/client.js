@@ -10,6 +10,9 @@ $(document).ready(function(){
   $('#viewTasks').on('click', '.delete', function(){
     clickDeleteTaskCatergory($(this).attr('id'))
   })//end delete onclick
+  $('#sortSubmit').on('click', function(){
+    runSort($('#sortBySelect').val());
+  })
 })//end document ready
 
 
@@ -121,17 +124,45 @@ function deleteTask(id){
 
 function getTaskList(){
   $.ajax({
-    url: '/toDo/taskGet',
     type: 'GET',
-    success: function( data ){
+    url: '/toDo/taskGet'
+  })
+  .done(function( data ){
       console.log( 'got getTaskList: ', data );
     writeList(data);
-    },
-    error: function(error){
+  })
+  .fail(function(error){
       console.log('failure on get getTaskList');
-    }
-  });
+  })
+
 }//end getTaskList
+
+function runSort(sort){
+  console.log('in runSort', sort);
+  if(sort){
+    sortTaskList(sort);
+  }//end if
+  else{
+    console.error('error, please select a sort by');
+  }
+}//end runSort
+
+function sortTaskList(sort){
+  console.log('in sortTaskList');
+  $.ajax({
+    type: 'POST',
+    url: '/toDo/taskSort',
+    data: {data:sort}
+  })
+    .done(function( data ){
+      console.log( 'got getTaskList: ', data );
+    writeList(data);
+    })
+    .fail(function(error){
+      console.log('failure on get getTaskList');
+    })
+
+}//end sortTaskList
 
 function writeList(taskTable){
   console.log(taskTable, 'in write');
