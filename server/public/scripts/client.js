@@ -12,8 +12,7 @@ $(document).ready(function(){
   })//end delete onclick
   $('#sortBySelect').change(function(){
     runSort($('#sortBySelect').val());
-    console.log($('#sortBySelect').val());
-  })
+  })//end sortBySelect on change
 })//end document ready
 
 
@@ -157,7 +156,6 @@ function runSort(sort){
 }//end runSort
 
 function sortTaskList(sort){
-  console.log('in sortTaskList', sort);
   $.ajax({
     type: 'POST',
     url: '/toDo/taskSort',
@@ -173,7 +171,6 @@ function sortTaskList(sort){
 }//end sortTaskList
 
 function writeList(taskTable){
-  console.log(taskTable, 'in write');
   $('#viewTasks').empty();
   for(i=0; i<taskTable.length; i++){
     let name = taskTable[i].task_name;

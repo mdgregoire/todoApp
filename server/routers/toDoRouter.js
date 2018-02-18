@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 
 router.post('/taskSort', function(request, response){
   let sort = request.body.data;
-  console.log(sort, 'sort in router');
   let sqlText = `SELECT task.task_name, catergory.catergory_name, task.task_date_assigned,
                           task.task_due_date, task.task_id, task.task_completed FROM task
                           JOIN task_catergory on task.task_id = task_catergory.task_id
@@ -46,7 +45,6 @@ router.post('/taskTablePost', function(request, response){
 
 router.post('/taskCatergoryTablePost', function(request, response){
   const taskToAdd = request.body;
-  console.log(taskToAdd.catergory, 'in taskcatergory table post');
   const sqlText = `INSERT INTO task_catergory
                   (task_id, catergory_id)
                   VALUES ((SELECT task_id FROM task WHERE task_name = $1),
