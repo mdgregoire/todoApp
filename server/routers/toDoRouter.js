@@ -3,22 +3,22 @@ const router = express.Router();
 const pool = require('../modules/pool');
 const bodyParser = require('body-parser');
 
-router.get('/taskGet', function(request, response){
-  const sqlText = `SELECT task.task_name, catergory.catergory_name, task.task_date_assigned,
-                          task.task_due_date, task.task_id, task.task_completed FROM task
-                          JOIN task_catergory on task.task_id = task_catergory.task_id
-                          JOIN catergory on task_catergory.catergory_id = catergory.catergory_id
-                          ORDER by task_due_date asc;`;
-  pool.query(sqlText)
-  .then(function (result){
-    console.log('got result', result.rows);
-    response.send(result.rows);
-  })
-  .catch(function(error){
-    console.log('error on get in router', error);
-    response.sendStatus(500);
-  })
-})// end get task table router
+// router.get('/taskGet', function(request, response){
+//   const sqlText = `SELECT task.task_name, catergory.catergory_name, task.task_date_assigned,
+//                           task.task_due_date, task.task_id, task.task_completed FROM task
+//                           JOIN task_catergory on task.task_id = task_catergory.task_id
+//                           JOIN catergory on task_catergory.catergory_id = catergory.catergory_id
+//                           ORDER by task_completed asc;`;
+//   pool.query(sqlText)
+//   .then(function (result){
+//     console.log('got result', result.rows);
+//     response.send(result.rows);
+//   })
+//   .catch(function(error){
+//     console.log('error on get in router', error);
+//     response.sendStatus(500);
+//   })
+// })// end get task table router
 
 router.post('/taskSort', function(request, response){
   let sort = request.body.data;
@@ -26,8 +26,15 @@ router.post('/taskSort', function(request, response){
   let sqlText = `SELECT task.task_name, catergory.catergory_name, task.task_date_assigned,
                           task.task_due_date, task.task_id, task.task_completed FROM task
                           JOIN task_catergory on task.task_id = task_catergory.task_id
-                          JOIN catergory on task_catergory.catergory_id = catergory.catergory_id
-                          ORDER by ${sort} asc;`;
+                          JOIN catergory on task_catergory.catergory_id = catergory.catergory_id `;
+  if(sort){
+    sqlText += `ORDER by ${sort} asc;`;
+  }
+  else{
+    sqlText += `ORDER by task_completed asc;`;
+  }
+
+
   pool.query(sqlText)
   .then(function (result){
     console.log('got result', result.rows);
