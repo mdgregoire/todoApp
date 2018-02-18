@@ -8,7 +8,7 @@ $(document).ready(function(){
     clickComplete($(this).attr('id'))
   })//end complete onclick
   $('#viewTasks').on('click', '.delete', function(){
-    clickDeleteTaskCatergory($(this).attr('id'))
+    confirmDelete($(this).attr('id'));
   })//end delete onclick
   $('#sortBySelect').change(function(){
     runSort($('#sortBySelect').val());
@@ -107,6 +107,15 @@ function collectTask(){
   };
   addTaskToTaskTable(taskDescription);
 }//end collectTask
+
+function confirmDelete(id){
+  if(confirm("Select OK to delete this task.")){
+    clickDeleteTaskCatergory(id)
+  }//end if
+  else{
+    getTaskList()
+  }
+}//end confirmDelete
 
 function deleteTask(id){
   $.ajax({
