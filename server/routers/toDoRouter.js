@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 
 router.get('/taskGet', function(request, response){
   const sqlText = `SELECT task.task_name, catergory.catergory_name, task.task_date_assigned,
-                          task.task_due_date, task.task_id FROM task
+                          task.task_due_date, task.task_id, task.task_completed FROM task
                           JOIN task_catergory on task.task_id = task_catergory.task_id
                           JOIN catergory on task_catergory.catergory_id = catergory.catergory_id
                           ORDER by task_date_assigned;`;
@@ -19,9 +19,6 @@ router.get('/taskGet', function(request, response){
     response.sendStatus(500);
   })
 })// end get task table router
-
-
-
 
 router.post('/taskTablePost', function(request, response){
   const taskToAdd = request.body;
@@ -55,7 +52,19 @@ router.post('/taskCatergoryTablePost', function(request, response){
   })
 })//end task_catergory table post
 
-
+router.put('/complete', function(request, response){
+  const id = request.body.data;
+  const sqlText = `UPDATE task SET task_completed = 'Y' WHERE task_id = $1`;
+  pool.query(sqlText, [id])
+  .then (function(result){
+    console.log('updated', id);
+    response.sendStatus(200);
+  })
+  .catch(function(error){
+    console.log('error on update', error);
+    response.sendStatus(500);
+  })
+})//end put for completed, todo table
 
 
 

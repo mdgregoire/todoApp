@@ -4,6 +4,9 @@ $(document).ready(function(){
   $('#taskSubmitButton').on('click', function(){
     collectTask();
   })//end taskSubmitButton onclick
+  $('#viewTasks').on('click', '.complete', function(){
+    clickComplete($(this).attr('id'))
+  })
 })//end document ready
 
 
@@ -33,12 +36,35 @@ function addTaskToTaskCatergoryTable(objectToAdd){
     data: objectToAdd,
     success: function( data ){
       console.log( 'added task: ', data );
+    getTaskList();
     },
     error: function(error){
       console.log('failure on post');
     }
   });
 }//end addTaskToTaskCatergoryTable
+
+function clearInputs(){
+  $('#taskInput').val('');
+  $('#catergorySelector').val('');
+  $('#dueDate').val('');
+}//end clearInputs
+
+function clickComplete(id){
+  console.log('in clickComplete', id);
+  $.ajax({
+    type: 'PUT',
+    url: '/toDo/complete',
+    data: {data:id}
+  })
+  .done(function(response){
+    console.log(' UPDATE was success', response);
+    getTaskList()
+  })
+  .fail(function(error){
+    console.log(error, 'update');
+  })
+}//end clickComplete
 
 function collectTask(){
   let taskDescription = {
@@ -75,11 +101,20 @@ function writeList(taskTable){
     let dateAssigned = taskTable[i].task_date_assigned.substring(0, 10);
     let dueDate = taskTable[i].task_due_date.substring(0, 10)
     let id = taskTable[i].task_id;
-    let stringToAppend = `<tr><td>${name}</td><td>${catergory}</td>
-                          <td>${dateAssigned}</td><td>${dueDate}</td>
-                          <td><input type="radio" class = "complete" id = ${id}></td>
-                          <td><input type="radio" class = "delete" id = ${id}></td></tr>`;
+    let completed = taskTable[i].task_completed;
+    let stringToAppend;
+    if(completed == 'N'){
+      stringToAppend += `<tr><td><input type="radio" class = "complete" id = ${id}></td>`;
+    }//end if
+    else {
+      stringToAppend += `<tr class ="completed"><td></td>`
+    }//end else
+    stringToAppend +=`<td>${name}</td><td>${catergory}</td>
+                      <td>${dateAssigned}</td><td>${dueDate}</td>
+                      <td><input type="radio" class = "delete" id = ${id}></td></tr>`;
     $('#viewTasks').append(stringToAppend);
   }//end for loop
+
+  clearInputs();
 
 }//end writeList
