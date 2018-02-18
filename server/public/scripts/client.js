@@ -10,8 +10,9 @@ $(document).ready(function(){
   $('#viewTasks').on('click', '.delete', function(){
     clickDeleteTaskCatergory($(this).attr('id'))
   })//end delete onclick
-  $('#sortSubmit').on('click', function(){
+  $('#sortBySelect').change(function(){
     runSort($('#sortBySelect').val());
+    console.log($('#sortBySelect').val());
   })
 })//end document ready
 
@@ -148,7 +149,7 @@ function runSort(sort){
 }//end runSort
 
 function sortTaskList(sort){
-  console.log('in sortTaskList');
+  console.log('in sortTaskList', sort);
   $.ajax({
     type: 'POST',
     url: '/toDo/taskSort',

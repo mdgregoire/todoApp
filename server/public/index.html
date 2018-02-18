@@ -6,13 +6,16 @@
     <script src="./vendors/jquery-3.3.1.min.js" charset="utf-8"></script>
     <script src="./scripts/client.js" charset="utf-8"></script>
     <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu">
   </head>
   <body>
     <div class="container" align="center">
       <div id="image">
         <img src="Scan copy.jpeg" position="center" style="width:640px; height:870px">
       </div>
-      <h1>TODOAPP</h1>
+      <section id="header">
+      <h1>Things To Do</h1>
+    </section>
         <div id="inputs">
         <section id="inputFields">
           <input type="text" class="toDoInput" id="taskInput" placeholder="Enter Task Here">
@@ -27,7 +30,7 @@
             <option value="School">School</option>
             <option value="Misc">Misc</option>
           </select>
-          <input type="date" class="toDoInput" id="dueDate" placeholder="Due Date">
+          <input type="date" class="toDoInput" id="dueDate">
           <button class="toDoInput" id="taskSubmitButton">Submit Task</button>
         </section>
         <section id="sortBy">
@@ -37,17 +40,15 @@
             <option value="task_due_date">Due Date</option>
             <option value="catergory_name">Catergory</option>
           </select>
-            <button id="sortSubmit">Sort</button>
         </section>
       </div><!--End input Field Div -->
-      <h2>All Tasks</h2>
       <div id="toDoTable">
 
         <table>
           <thead>
             <tr>
               <th class = "radial">Completed</th>
-              <th>Description</th>
+              <th class="descriptionCol">Description</th>
               <th>Catergory</th>
               <th>Date Assigned</th>
               <th>Due Date</th>

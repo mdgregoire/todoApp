@@ -1,13 +1,20 @@
+button, input, select, textarea {
+  font-family : inherit;
+  font-size   : 70%;
+}
+
 body{
   background-position: center top;
   background-repeat: no-repeat;
   background-color: darkblue;
   text-align: center;
+  font-family: 'Ubuntu';
+
 }
 .container{
   width: 640px;
   height: 870px;
-  margin top: 70px;
+  margin top: 100px;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -23,15 +30,38 @@ body{
   position:absolute;
 }
 
+#header{
+  margin-top: 67px
+}
+
+h1{
+  text-align: center;
+  position:relative;
+  z-index:10;
+  font-family: 'Ubuntu';
+  color: red;
+  font-size: 50pt;
+  margin-bottom: 17px;
+}
+
 #inputs {
   width: 640px;
   height: 25px;
   position:relative;
   z-index:10;
-  margin-top: 100px;
   text-align: left;
   margin-left: 10px;
+  font-family: 'Ubuntu';
 }
+
+#dueDate{
+  text-align: center;
+}
+#sortBySelect{
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
 #toDoTable{
   width: 640px;
   height: 400px;
@@ -39,23 +69,19 @@ body{
   z-index:10;
   margin-top: 27px;
   text-align: left;
-  margin-left: 88px;
+  font-family: 'Ubuntu';
+  font-size: small;
 }
-#sortBy{
-  text-align: left;
-  margin-top: 5px;
-}
-#sortBySelect{
-  margin-right: 10px;
-}
+
+
+
 .completed{
   text-decoration: line-through;
   text-decoration-color: red;
+  text-decoration-style: bold;
 }
 
-h1{
-  text-align: center;
-}
+
 
 h2{
   text-align: center;
@@ -77,8 +103,12 @@ button{
 }
 table {
   border-collapse: collapse;
-
+  table-layout: fixed;
+  width: 85%;
+  white-space: nowrap;
+  margin-left: 76px;
 }
+
 tr{
   border: none;
 }
@@ -87,6 +117,10 @@ td{
   border-right: solid 1px dodgerblue;
   text-align: center;
   height: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
 }
 th{
   text-align: center;
@@ -98,6 +132,6 @@ th{
   width: 110px;
 }
 .radial{
-  width: 20px;
+  width: 50px;
   font-size: x-small;
 }
