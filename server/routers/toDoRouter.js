@@ -8,7 +8,7 @@ router.get('/taskGet', function(request, response){
                           task.task_due_date, task.task_id, task.task_completed FROM task
                           JOIN task_catergory on task.task_id = task_catergory.task_id
                           JOIN catergory on task_catergory.catergory_id = catergory.catergory_id
-                          ORDER by task_date_assigned;`;
+                          ORDER by task_due_date asc;`;
   pool.query(sqlText)
   .then(function (result){
     console.log('got result', result.rows);
@@ -66,7 +66,33 @@ router.put('/complete', function(request, response){
   })
 })//end put for completed, todo table
 
+router.delete('/deleteTask', function(request, response){
+  const id = request.body.data;
+  const sqlText = `DELETE FROM task WHERE task_id = $1`;
+  pool.query(sqlText, [id])
+  .then(function(result){
+    console.log('deleted task', id);
+    response.sendStatus(200);
+  })
+  .catch(function(error){
+    console.log('error on delete task', error);
+    response.sendStatus(500)
+  })
+})//end deleteTaskCatergory
 
+router.delete('/deleteTaskCatergory', function(request, response){
+  const id = request.body.data;
+  const sqlText = `DELETE FROM task_catergory WHERE task_id = $1`;
+  pool.query(sqlText, [id])
+  .then(function(result){
+    console.log('deleted task_catergory', id);
+    response.sendStatus(200);
+  })
+  .catch(function(error){
+    console.log('error on delete task_catergory', error);
+    response.sendStatus(500)
+  })
+})//end deleteTaskCatergory
 
 
 module.exports = router;

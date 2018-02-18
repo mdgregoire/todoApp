@@ -6,7 +6,10 @@ $(document).ready(function(){
   })//end taskSubmitButton onclick
   $('#viewTasks').on('click', '.complete', function(){
     clickComplete($(this).attr('id'))
-  })
+  })//end complete onclick
+  $('#viewTasks').on('click', '.delete', function(){
+    clickDeleteTaskCatergory($(this).attr('id'))
+  })//end delete onclick
 })//end document ready
 
 
@@ -44,6 +47,17 @@ function addTaskToTaskCatergoryTable(objectToAdd){
   });
 }//end addTaskToTaskCatergoryTable
 
+function checkforComplete(id, completed){
+  let string;
+  if(completed == 'N'){
+    string += `<tr><td><input type="radio" class = "complete" id = ${id}></td>`;
+  }//end if
+  else {
+    string += `<tr class ="completed"><td></td>`
+  }//end else
+  return (string);
+}//end checkforComplete
+
 function clearInputs(){
   $('#taskInput').val('');
   $('#catergorySelector').val('');
@@ -51,7 +65,6 @@ function clearInputs(){
 }//end clearInputs
 
 function clickComplete(id){
-  console.log('in clickComplete', id);
   $.ajax({
     type: 'PUT',
     url: '/toDo/complete',
@@ -66,6 +79,21 @@ function clickComplete(id){
   })
 }//end clickComplete
 
+function clickDeleteTaskCatergory(id){
+  $.ajax({
+    type: 'DELETE',
+    url: 'toDo/deleteTaskCatergory',
+    data: {data:id}
+  })
+  .done(function(response){
+    console.log('delete was success', response);
+    deleteTask(id);
+  })
+  .fail(function(error){
+    console.log(error, 'delete');
+  })
+}//end clickDeleteTaskCatergory
+
 function collectTask(){
   let taskDescription = {
     description: $('#taskInput').val(),
@@ -76,7 +104,20 @@ function collectTask(){
   addTaskToTaskTable(taskDescription);
 }//end collectTask
 
-
+function deleteTask(id){
+  $.ajax({
+    type: 'DELETE',
+    url: 'toDo/deleteTask',
+    data: {data:id}
+  })
+  .done(function(response){
+    console.log('deletetask was success', response);
+    getTaskList(id);
+  })
+  .fail(function(error){
+    console.log(error, 'delete task');
+  })
+}//end deleteTask
 
 function getTaskList(){
   $.ajax({
@@ -102,19 +143,11 @@ function writeList(taskTable){
     let dueDate = taskTable[i].task_due_date.substring(0, 10)
     let id = taskTable[i].task_id;
     let completed = taskTable[i].task_completed;
-    let stringToAppend;
-    if(completed == 'N'){
-      stringToAppend += `<tr><td><input type="radio" class = "complete" id = ${id}></td>`;
-    }//end if
-    else {
-      stringToAppend += `<tr class ="completed"><td></td>`
-    }//end else
+    let stringToAppend = checkforComplete(id, completed);
     stringToAppend +=`<td>${name}</td><td>${catergory}</td>
                       <td>${dateAssigned}</td><td>${dueDate}</td>
                       <td><input type="radio" class = "delete" id = ${id}></td></tr>`;
     $('#viewTasks').append(stringToAppend);
   }//end for loop
-
   clearInputs();
-
 }//end writeList
