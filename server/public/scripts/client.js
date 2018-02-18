@@ -139,7 +139,7 @@ function deleteTask(id){
   })
   .done(function(response){
     console.log('deletetask was success', response);
-    sortTaskList(id);
+    sortTaskList();
   })
   .fail(function(error){
     console.log(error, 'delete task');
