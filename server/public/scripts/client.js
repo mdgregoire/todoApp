@@ -17,7 +17,7 @@ $(document).ready(function(){
 
 
 function onReady(){
-  sortTaskList();
+  sortTaskList($('#sortBySelect').val());
 }//end onReady function
 
 function addTaskToTaskTable (objectToAdd){
@@ -42,7 +42,7 @@ function addTaskToTaskCatergoryTable(objectToAdd){
     data: objectToAdd,
     success: function( data ){
       console.log( 'added task: ', data );
-    sortTaskList();
+    sortTaskList($('#sortBySelect').val());
     },
     error: function(error){
       console.log('failure on post');
@@ -89,7 +89,7 @@ function clickComplete(id){
   })
   .done(function(response){
     console.log(' UPDATE was success', response);
-    sortTaskList()
+    sortTaskList($('#sortBySelect').val())
   })
   .fail(function(error){
     console.log(error, 'update');
@@ -126,7 +126,7 @@ function confirmDelete(id){
     clickDeleteTaskCatergory(id)
   }//end if
   else{
-    sortTaskList()
+    sortTaskList($('#sortBySelect').val())
   }
 }//end confirmDelete
 
@@ -138,7 +138,7 @@ function deleteTask(id){
   })
   .done(function(response){
     console.log('deletetask was success', response);
-    sortTaskList();
+    sortTaskList($('#sortBySelect').val());
   })
   .fail(function(error){
     console.log(error, 'delete task');
@@ -156,10 +156,10 @@ function runSort(sort){
 }//end runSort
 
 function sortTaskList(sort){
+  console.log('in sortTaskList', sort);
   $.ajax({
-    type: 'POST',
-    url: '/toDo/taskSort',
-    data: {data:sort}
+    type: 'GET',
+    url: '/toDo/taskSort/'+sort
   })
     .done(function( data ){
       console.log( 'got getTaskList: ', data );

@@ -3,8 +3,8 @@ const router = express.Router();
 const pool = require('../modules/pool');
 const bodyParser = require('body-parser');
 
-router.post('/taskSort', function(request, response){
-  let sort = request.body.data;
+router.get('/taskSort/:sort', function(request, response){
+  let sort = request.params.sort;
   let sqlText = `SELECT task.task_name, catergory.catergory_name, task.task_date_assigned,
                           task.task_due_date, task.task_id, task.task_completed FROM task
                           JOIN task_catergory on task.task_id = task_catergory.task_id

@@ -30,16 +30,17 @@
             <option value="School">School</option>
             <option value="Misc">Misc</option>
           </select>
+          <label for "dueDate">Due Date:</label>
           <input type="date" class="toDoInput" id="dueDate">
           <button class="toDoInput" id="taskSubmitButton">Submit Task</button>
         </section>
         <section id="sortBy">
           <select id="sortBySelect">
-            <option value="" disabled selected>Sort By:</option>
+            <!-- <option value="" disabled selected>Sort By:</option> -->
             <option value="task_date_assigned">Date Added</option>
             <option value="task_due_date">Due Date</option>
             <option value="catergory_name">Catergory</option>
-            <option value="task_completed">Completed<option>
+            <option selected value="task_completed">Completed<option>
           </select>
         </section>
       </div><!--End input Field Div -->
