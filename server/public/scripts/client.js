@@ -121,7 +121,7 @@ function createTables(){
       console.log( 'added tables: ', data );
   })
     .fail(function(error){
-      console.log('failure on createTables post (this is to be expected if the tables already exist)');
+      console.log('failure on createTables post (this is to be expected if the tables already exists)');
   });
 }//end createTables
 

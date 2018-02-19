@@ -17,7 +17,7 @@ router.post('/createTables', function(request, response){
   	task_id INT REFERENCES task,
   	catergory_id INT REFERENCES catergory);
     INSERT INTO catergory (catergory_name)
-    VALUES ('Kitchen'),
+VALUES ('Kitchen'),
 	   ('Bathroom'),
 	   ('Laundry'),
 	   ('Bills'),
