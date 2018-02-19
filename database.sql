@@ -1,32 +1,4 @@
-CREATE TABLE task (
-	task_id serial primary key,
-	task_name VARCHAR (280),
-	task_due_date date,
-	task_date_assigned date default now(),
-	task_completed VARCHAR(1)
-);
-
-CREATE TABLE catergory (
-	catergory_id serial primary key,
-	catergory_name VARCHAR (240)
-);
-
-
-CREATE TABLE task_catergory (
-	task_catergory_id serial primary key,
-	task_id INT REFERENCES task,
-	catergory_id INT REFERENCES catergory
-);
-
-INSERT INTO catergory (catergory_name)
-VALUES ('Kitchen'),
-	   ('Bathroom'),
-	   ('Laundry'),
-	   ('Bills'),
-	   ('Personal'),
-	   ('Work'),
-	   ('School'),
-	   ('Misc')	;
+-- Run these  in postico to create Dummy entries for testing --
 
 INSERT INTO task (task_name, task_due_date, task_completed)
 VALUES ('Do Dishes', '03/17/18', 'N'),

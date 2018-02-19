@@ -2,14 +2,12 @@ button, input, select, textarea {
   font-family : inherit;
   font-size   : 70%;
 }
-
 body{
   background-position: center top;
   background-repeat: no-repeat;
   background-color: darkblue;
   text-align: center;
   font-family: 'Ubuntu';
-
 }
 .container{
   width: 640px;
@@ -19,7 +17,6 @@ body{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
 }
 #image{
   top:0;
@@ -28,7 +25,6 @@ body{
   bottom:0;
   position:absolute;
 }
-
 #header{
   margin-top: 67px
 }
@@ -46,7 +42,6 @@ h2{
   margin-bottom: 0px;
   float: left;
 }
-
 #inputs {
   width: 640px;
   height: 25px;
@@ -55,11 +50,9 @@ h2{
   text-align: left;
   margin-left: 10px;
 }
-
 #sortBySelect{
   margin-top: 5px;
 }
-
 #toDoTable{
   width: 640px;
   height: 400px;
@@ -69,21 +62,17 @@ h2{
   text-align: left;
   font-size: small;
 }
-
 .completed{
   text-decoration: line-through;
   text-decoration-color: red;
 }
-
 input{
   text-align: center;
   background: transparent;
 }
-
 select{
   background: transparent;
 }
-
 button{
   background: transparent;
 }
@@ -94,7 +83,6 @@ table {
   white-space: nowrap;
   margin-left: 76px;
 }
-
 tr{
   border: none;
 }
@@ -106,7 +94,6 @@ td{
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-
 }
 th{
   text-align: center;
