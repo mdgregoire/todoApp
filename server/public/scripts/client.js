@@ -175,7 +175,7 @@ function sortTaskList(sort){
     type: 'GET',
     url: '/toDo/taskSort/'+sort
   })
-    .done(function( data ){
+    .done(function(data){
       console.log( 'got getTaskList: ', data );
     writeList(data);
     })
