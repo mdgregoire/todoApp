@@ -3,6 +3,40 @@ const router = express.Router();
 const pool = require('../modules/pool');
 const bodyParser = require('body-parser');
 
+router.post('/createTables', function(request, response){
+  let sqlText = `CREATE TABLE task (task_id serial primary key,
+    task_name VARCHAR (280),
+    task_due_date date,
+    task_date_assigned date default now(),
+    task_completed VARCHAR(1));
+  CREATE TABLE catergory (
+  	catergory_id serial primary key,
+  	catergory_name VARCHAR (240));
+  CREATE TABLE task_catergory (
+  	task_catergory_id serial primary key,
+  	task_id INT REFERENCES task,
+  	catergory_id INT REFERENCES catergory);
+    INSERT INTO catergory (catergory_name)
+    VALUES ('Kitchen'),
+	   ('Bathroom'),
+	   ('Laundry'),
+	   ('Bills'),
+	   ('Personal'),
+	   ('Work'),
+	   ('School'),
+	   ('Misc')	;`;
+  console.log(sqlText, 'in createTables');
+  pool.query(sqlText)
+  .then(function(result){
+    console.log('created Tables', result);
+    response.sendStatus(200);
+  })
+  .catch(function(error){
+    console.log('error in createTables', error);
+    response.sendStatus(500);
+  })
+})//end createTables post
+
 router.get('/taskSort/:sort', function(request, response){
   let sort = request.params.sort;
   console.log('in taskSort', sort);

@@ -17,6 +17,7 @@ $(document).ready(function(){
 
 
 function onReady(){
+  createTables();
   sortTaskList($('#sortBySelect').val());
 }//end onReady function
 
@@ -24,14 +25,13 @@ function addTaskToTaskTable (objectToAdd){
   $.ajax({
     url: '/toDo/taskTablePost',
     type: 'POST',
-    data: objectToAdd,
-    success: function( data ){
+    data: objectToAdd
+  }).done(function(data){
       console.log( 'added task: ', data );
     addTaskToTaskCatergoryTable(objectToAdd);
-    },
-    error: function(error){
+  })
+    .fail(function(error){
       console.log('failure on post');
-    }
   });
 }//end addTaskToTaskTable
 
@@ -39,14 +39,13 @@ function addTaskToTaskCatergoryTable(objectToAdd){
   $.ajax({
     url: '/toDo/taskCatergoryTablePost',
     type: 'POST',
-    data: objectToAdd,
-    success: function( data ){
+    data: objectToAdd
+  }).done(function( data ){
       console.log( 'added task: ', data );
     sortTaskList($('#sortBySelect').val());
-    },
-    error: function(error){
+  })
+    .fail(function(error){
       console.log('failure on post');
-    }
   });
 }//end addTaskToTaskCatergoryTable
 
@@ -113,6 +112,18 @@ function clickDeleteTaskCatergory(id){
     console.log(error, 'delete');
   })
 }//end clickDeleteTaskCatergory
+
+function createTables(){
+  $.ajax({
+    url: '/toDo/createTables',
+    type: 'POST'
+  }).done(function( data ){
+      console.log( 'added tables: ', data );
+  })
+    .fail(function(error){
+      console.log('failure on createTables post (this is to be expected if the tables already exist)');
+  });
+}//end createTables
 
 function collectTask(){
   let taskDescription = {
