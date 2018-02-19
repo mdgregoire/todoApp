@@ -51,6 +51,7 @@ function addTaskToTaskCatergoryTable(objectToAdd){
 }//end addTaskToTaskCatergoryTable
 
 function checkDueDate(date){
+  //changes background color of the due date cell to red if overdue
   let nowDate = new Date();
   let compareDate = new Date(date);
   let string;
@@ -70,7 +71,9 @@ function checkforComplete(id, completed){
   }//end if
   else {
     string += `<tr class ="completed"><td></td>`
-    //completed class adds red strikethrough to every cell in the row, and moves the task to the bottom of the list
+    //completed class adds red strikethrough to every text cell in the row,
+    //and moves the task to the bottom of the list,
+    //by default all completed tasks stick at the bottom
   }//end else
   return (string);
 }//end checkforComplete
@@ -180,10 +183,12 @@ function writeList(taskTable){
     let id = taskTable[i].task_id;
     let completed = taskTable[i].task_completed;
 
-    //this function will check the due date vs the current date and change the cell background to red if it is past due
+    //this function will check the due date vs the current date and change the
+    //cell background to red if it is past due
     let dateString = checkDueDate(dueDate);
 
-    //this function checks to see if the task has been completed and if so changes the class of the entire row.
+    //this function checks to see if the task has been completed and if so
+    //changes the class of the entire row.
     let stringToAppend = checkforComplete(id, completed);
 
     stringToAppend +=`<td>${name}</td><td>${catergory}</td><td>${dateAssigned}</td>

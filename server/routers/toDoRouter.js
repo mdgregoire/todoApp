@@ -5,19 +5,16 @@ const bodyParser = require('body-parser');
 
 router.get('/taskSort/:sort', function(request, response){
   let sort = request.params.sort;
+  console.log('in taskSort', sort);
   let sqlText = `SELECT task.task_name, catergory.catergory_name, task.task_date_assigned,
                           task.task_due_date, task.task_id, task.task_completed FROM task
                           JOIN task_catergory on task.task_id = task_catergory.task_id
-                          JOIN catergory on task_catergory.catergory_id = catergory.catergory_id `;
-  if(sort){
-    sqlText += `ORDER by ${sort} asc;`;
-    //I know that I should be using $1 here...could not get it to work.  Will keep trying.
-  }
-  else{
-    sqlText += `ORDER by task_completed asc;`;
-  }
-
+                          JOIN catergory on task_catergory.catergory_id = catergory.catergory_id
+                          ORDER by task_completed, ${sort} asc;`;
+                          //the ${sort} above should be $1, it wont work though
+  console.log(sqlText, 'in taskSort sqlTExt');
   pool.query(sqlText)
+  //the above should be --  pool.query(sqlText, [sort])  but it won't work for me
   .then(function (result){
     console.log('got result', result.rows);
     response.send(result.rows);
