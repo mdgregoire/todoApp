@@ -16,15 +16,15 @@ router.post('/createTables', function(request, response){
   	task_catergory_id serial primary key,
   	task_id INT REFERENCES task,
   	catergory_id INT REFERENCES catergory);
-    INSERT INTO catergory (catergory_name)
-VALUES ('Kitchen'),
-	   ('Bathroom'),
-	   ('Laundry'),
-	   ('Bills'),
-	   ('Personal'),
-	   ('Work'),
-	   ('School'),
-	   ('Misc')	;`;
+  INSERT INTO catergory (catergory_name)
+  VALUES ('Kitchen'),
+   ('Bathroom'),
+   ('Laundry'),
+   ('Bills'),
+   ('Personal'),
+   ('Work'),
+   ('School'),
+   ('Misc')	;`;
   console.log(sqlText, 'in createTables');
   pool.query(sqlText)
   .then(function(result){
@@ -37,18 +37,41 @@ VALUES ('Kitchen'),
   })
 })//end createTables post
 
-router.get('/taskSort/:sort', function(request, response){
-  let sort = request.params.sort;
-  console.log('in taskSort', sort);
+router.get('/taskSort/:sortType', function(request, response){
+  let sortType = request.params.sortType;
+  let sort_text = '';
+  console.log('in taskSort', sortType);
+
+  switch (sortType){
+
+    case 'catergory_name':
+    sort_text = 'catergory_name';
+    break;
+
+    case 'task_due_date':
+    sort_text = 'task_due_date';
+    break;
+
+    case 'task_date_assigned':
+    sort_text = 'task_date_assigned';
+    break;
+
+    case 'task_completed':
+    sort_text = 'task_completed';
+    break;
+
+    default:
+    break;
+  }
+  console.log(sort_text, 'sort in sortType');
   let sqlText = `SELECT task.task_name, catergory.catergory_name, task.task_date_assigned,
                     task.task_due_date, task.task_id, task.task_completed FROM task
                     JOIN task_catergory on task.task_id = task_catergory.task_id
                     JOIN catergory on task_catergory.catergory_id = catergory.catergory_id
-                    ORDER by task_completed, ${sort} asc;`;
-                    //the ${sort} above should be $1, it wont work though
+                    ORDER by task_completed, ${sort_text};`;
+
   console.log(sqlText, 'in taskSort sqlTExt');
   pool.query(sqlText)
-  //the above should be --  pool.query(sqlText, [sort])  but it won't work for me
   .then(function (result){
     console.log('got result', result.rows);
     response.send(result.rows);
